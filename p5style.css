@@ -13,7 +13,7 @@ body {
 
 #chat {
     width: 400px;
-    height: 600px;
+    height: 680px;
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
