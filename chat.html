@@ -1,13 +1,14 @@
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitch chat</title>
     <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="p5style.css">
+	<link href="https://allfont.net/allfont.css?fonts=franklin-gothic-demi" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -21,13 +22,16 @@
 </body>
 
 <script>
-    var chat = document.querySelector("#chat>ul"); // je catch ma div en haut
+    var chat = document.querySelector("#chat>ul");
 
     ComfyJS.onChat = (user, message, flags, self, extra) => {
         var newMessage = document.createElement("li");
 		newMessage.classList.add("col-4");
-        var newImage = document.createElement("div");
-		newImage.classList.add("col-1");
+		var divImage = document.createElement("div");
+        var newImage = document.createElement("img");
+		newImage.src = "./test.png";
+		divImage.classList.add("col-1");
+		divImage.classList.add("div-image");
 		newImage.classList.add("image1");
 
         if (message.mod) {
@@ -40,12 +44,17 @@
 
         var text = document.createElement("blockquote");
 		text.classList.add("col-7");
-
-        newMessage.innerText = user;
+		text.classList.add("index-low");
+		if(user.length > 10) {
+			newMessage.innerText = user.slice(0, 11) + " " + user.slice(11);
+		}
+		else {
+			newMessage.innerText = user;
+		}
         text.innerText = message;
-
+		divImage.append(newImage);
         chat.append(newMessage);
-		chat.append(newImage);
+		chat.append(divImage);
         chat.append(text);
     }
 
